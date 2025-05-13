@@ -1,2 +1,28 @@
-# SHALINI-S
-Alcohol detection system using an MQ4 sensor and Arduino
+#define MQ4pin A0
+float sensorValue; 
+void setup() {
+sensorValue = analogRead(MQ4pin); 
+Serial.begin(9600); 
+pinMode(2,OUTPUT); //LED
+pinMode(3,OUTPUT); //MOTOR
+pinMode(4,OUTPUT); //BUZZOR
+digitalWrite(3,HIGH);
+}
+void loop() {
+sensorValue = analogRead(MQ4pin); 
+Serial.print("ALCOHOL VALUE:"); 
+Serial.println(sensorValue);
+delay(1000);
+if(sensorValue>=750)
+{
+  digitalWrite(3,LOW);
+  digitalWrite(2,HIGH);
+  digitalWrite(4,HIGH); 
+}
+else
+{
+  digitalWrite(3,HIGH);
+  digitalWrite(2,LOW);
+  digitalWrite(4,LOW); 
+}
+}
